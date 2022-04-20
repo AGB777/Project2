@@ -192,74 +192,50 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    margin: 0 auto;
-    margin-top: 100px;
+#ScheduleBox {
+    display: grid;
+    grid-template-columns: 8% 12% 12% 12% 12% 12% 12% 12% 8%;
+    grid-template-rows:  12% 12% 12% 12% 12% 12% 12%;
+  margin-top: 20px;
+  font-size: 0.7em;
+  text-align: center;
 }
 
-.domo {
-    width: 95%;
-    margin: 0 auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    background-color: #55acee;
-    padding: 10px;
-    min-height:60px;
-    overflow: hidden;
+.entry {
+    margin:0;
+    border-radius: 0px;
+    border-width: 3px;
+    resize:none;
+    border-top: none;
+    border-left: none;
+    border-bottom:5px solid burlywood;
+    border-right:5px solid burlywood;
 }
 
-.domo:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
 
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyDomo {
-    width: 400px;
-    font-size: 1.5em;
-    margin: 0 auto;
+.time-label {
+    grid-column:1;
+    font-size: 1.2em;
     text-align: center;
-    margin-top: 18px;
+    border:5px solid burlywood;
 }
+.d0 {grid-column: 2;}
+.d1 {grid-column: 3;}
+.d2 {grid-column: 4;}
+.d3 {grid-column: 5;}
+.d4 {grid-column: 6;}
+.d5 {grid-column: 7;}
+.d6 {grid-column: 8;}
 
-h3.domoName {
-    float:left;
-    width: 200px;
-    font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
+.day-label {
+    grid-row:1;
+    font-size: 1.2em;
+    border:5px solid burlywood;
 }
-
-h3.domoAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
-}
-
-.domo:first-child {
-    margin-top: 10px;
-}
-
-.domo:last-child {
-    margin-bottom:10px;
-}
+.hr0 {grid-row: 2;}
+.hr1 {grid-row: 3;}
+.hr2 {grid-row: 4;}
+.hr3 {grid-row: 5;}
+.hr4 {grid-row: 6;}
+.hr5 {grid-row: 7;}
+.hr6 {grid-row: 8;}

@@ -76,25 +76,52 @@ var __webpack_exports__ = {};
 (() => {
 const helper = __webpack_require__(1);
 
+let defaultSched = '';
+
 const ScheduleForm = props => {
-  return /*#__PURE__*/React.createElement("a", {
-    id: "testButton",
-    href: ""
-  }, "Testing");
+  //the string will be formatted like this
+  //d0_hr0:contents,d0_hr1:contents,d0_hr2
+  const weekString = props.week;
+  const entries = weekString.split(',');
+  const formattedEntries = entries.map(entry => {
+    let splitEntry = entry.split(':');
+    let dayHour = splitEntry[0].replaceAll('_', ' ');
+    return /*#__PURE__*/React.createElement("div", {
+      key: splitEntry[0],
+      className: dayHour,
+      id: splitEntry[0]
+    }, splitEntry[1]);
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    id: "ScheduleBox"
+  }, formattedEntries);
 };
 
 const loadSchedule = async () => {
   const response = await fetch('/scheduleData');
   const data = await response.json();
-  console.log(data.myWeek);
+  console.log(data.myWeek); //ok now this should be the string I want.
+  //the big string to parse into a json obj for all the data for each day/hour
+
+  ReactDOM.render( /*#__PURE__*/React.createElement(ScheduleForm, {
+    week: data.myWeek
+  }), document.querySelector('#content'));
 };
 
 const init = () => {
-  ReactDOM.render( /*#__PURE__*/React.createElement(ScheduleForm, null), document.querySelector('#content'));
-  document.querySelector('#testButton').addEventListener('click', e => {
-    e.preventDefault();
-    loadSchedule();
-  });
+  //here i need to construct my default schedule string
+  //i aint typing all that myself
+  defaultSched = '';
+
+  for (let i = 0; i < 7; i++) {
+    for (let n = 0; n < 7; n++) {
+      defaultSched = defaultSched.concat('entry_d', i, '_hr', n, ':agawaga,');
+    }
+  }
+
+  ReactDOM.render( /*#__PURE__*/React.createElement(ScheduleForm, {
+    week: defaultSched
+  }), document.querySelector('#content'));
 };
 
 window.onload = init;
