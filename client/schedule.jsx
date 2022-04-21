@@ -64,7 +64,7 @@ const defaultMyString = () => {
     
     for(let i=1; i<=numDays; i++){
         for(let n=1; n<=numHours; n++){
-            defaultSched = defaultSched.concat('entry_d',i,'_hr',n,':');
+            defaultSched = defaultSched.concat('entry_d',i,'_hr',n,':agawaga');
             if(i<numDays||n<numHours){
                 //if this was not the last entry, add ','
                 defaultSched = defaultSched.concat(',');
@@ -76,15 +76,36 @@ const defaultMyString = () => {
     
 }
 
+const readSchedule = () => {
+    
+    const numDays=7;
+    const numHours=10;
+    
+    let schedString='';
+    
+    for(let i=1; i<=numDays; i++){
+        for(let n=1; n<=numHours; n++){
+            schedString = schedString.concat('entry_d',i,'_hr',n,':');
+            let thisCell = document.querySelector(`#entry_d${i}_hr${n}`);
+            schedString = schedString.concat(thisCell.value);
+            if(i<numDays||n<numHours){
+                //if this was not the last entry, add ','
+                schedString = schedString.concat(',');
+            }
+        }
+    }
+    
+    return schedString;
+    
+};
+
 const init = () => {
     
     defaultMyString();
     
-    ReactDOM.render(
-        <ScheduleForm week = {defaultSched}/>,
-        document.querySelector('#content')
-    );
+    ReactDOM.render(<ScheduleForm week = {defaultSched}/> , document.querySelector('#content'));
     
+    console.log(readSchedule());
 };
 
 window.onload = init;
