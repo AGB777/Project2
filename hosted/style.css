@@ -4,90 +4,55 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 #logo {
-    height: 40px;
-    width: 40;
-    margin-top: 5px;
+    height: 60px;
+    width: 60;
     float:left;
     border-radius: 4px;
 }
 
-nav {
+#layout {
+    height: 100%;
     width: 100%;
-    height: 50px;
-    background-color: #55acee;
+    display: grid;
+    grid-template-columns: 10% 90%;
 }
 
-nav:nth-child(1) {
-    padding-left: 25px;
+#content {
+    grid-column: 2;
+}
+
+#sidebar {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+
+    padding:15px;
+    background-color: burlywood;
 }
 
 .navlink {
-    padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
-    color: white;
+    color: black;
     font-size: 1.3em;
     float: left;
 }
 
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: white;
+a, a:link, a:visited, a:hover, a:active {
+    display: inline-block;
+    color: black;
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: burlywood;
     transition: background-color 0.4s ease;
 }
 
-.navlink a:hover {
+a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
-}
-
-.domoForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 700px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-.domoForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    float: left;
-    color: white;
-}
-
-.domoForm input[type=text] {
-    float:left;
-}
-
-.makeDomoSubmit {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-}
-
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
-    color: white;
-}
-
-.makeDomoSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #7a8bd4;
 }
 
 .mainForm {
@@ -118,21 +83,21 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
+    background-color: burlywood;
+    border-radius: 4px;
+    border: 0px;
     padding: 3px 0px;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+    color: black;
 }
 
 .formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+    transition: background-color 0.2s ease;
+    background-color: #7a8bd4;
 }
 
 #user, #pass, #pass2 {
@@ -194,48 +159,65 @@ nav:nth-child(1) {
 
 #ScheduleBox {
     display: grid;
-    grid-template-columns: 8% 12% 12% 12% 12% 12% 12% 12% 8%;
-    grid-template-rows:  12% 12% 12% 12% 12% 12% 12%;
-  margin-top: 20px;
-  font-size: 0.7em;
-  text-align: center;
+    grid-template-columns: 9% 13% 13% 13% 13% 13% 13% 13%;
+    grid-template-rows:  8% 8% 8% 8% 8% 8% 8%;
+    margin-top: 20px;
+    margin-left:50px;
+    margin-right:50px;
+    border:2px solid burlywood;
+    font-size: 0.7em;
+    text-align: center;
 }
 
 .entry {
+    height:60px;
+    font-family: "Trebuchet MS", monospace;
     margin:0;
     border-radius: 0px;
     border-width: 3px;
     resize:none;
-    border-top: none;
-    border-left: none;
-    border-bottom:5px solid burlywood;
-    border-right:5px solid burlywood;
+    border: 2px solid burlywood;
+}
+
+.emptycell {
+    background-color: burlywood;
 }
 
 
 .time-label {
     grid-column:1;
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: center;
-    border:5px solid burlywood;
+    
+    background-color: burlywood;
+    padding: 1em;
 }
-.d0 {grid-column: 2;}
-.d1 {grid-column: 3;}
-.d2 {grid-column: 4;}
-.d3 {grid-column: 5;}
-.d4 {grid-column: 6;}
-.d5 {grid-column: 7;}
-.d6 {grid-column: 8;}
 
 .day-label {
     grid-row:1;
-    font-size: 1.2em;
-    border:5px solid burlywood;
+    font-size: 1.5em;
+    
+    background-color: burlywood;
+    padding: 1em;
 }
-.hr0 {grid-row: 2;}
-.hr1 {grid-row: 3;}
-.hr2 {grid-row: 4;}
-.hr3 {grid-row: 5;}
-.hr4 {grid-row: 6;}
-.hr5 {grid-row: 7;}
-.hr6 {grid-row: 8;}
+
+.d0 {grid-column: 1;}
+.d1 {grid-column: 2;}
+.d2 {grid-column: 3;}
+.d3 {grid-column: 4;}
+.d4 {grid-column: 5;}
+.d5 {grid-column: 6;}
+.d6 {grid-column: 7;}
+.d7 {grid-column: 8;}
+
+.hr0 {grid-row: 1;}
+.hr1 {grid-row: 2;}
+.hr2 {grid-row: 3;}
+.hr3 {grid-row: 4;}
+.hr4 {grid-row: 5;}
+.hr5 {grid-row: 6;}
+.hr6 {grid-row: 7;}
+.hr7 {grid-row: 8;}
+.hr8 {grid-row: 9;}
+.hr9 {grid-row: 10;}
+.hra {grid-row: 11;}

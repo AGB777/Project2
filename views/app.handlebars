@@ -8,17 +8,21 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body> 
-  <nav><a href="/login"><img id="logo" src="/assets/img/logo.png" alt="schedulize logo"/></a>
-    <div class="navlink"><a id="logoutButton" href="/logout">Log Out</a></div>
-  </nav>
-  <section id="content">
+    <div id="layout">
+        <div id="sidebar">
+            <div class="navlink" style="text-align: center;"><a href="/login"><img id="logo" src="/assets/img/logo.png" alt="schedulize logo"/></a></div>
+            <div class="navlink"><a id="logoutButton" href="/logout">Log Out</a></div>
+        </div>
+        <section id="content">
+        
+        </section>
+    </div>
 
-  </section>
-  <div id="errorMessenger" class='hidden'>
-    <img id="messageBox" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3>
-    <img id="messenger" src="assets/img/upright.png" alt="schedulize logo"/>
-  </div>
-  <script src="/assets/appbundle.js"></script>
+    <div id="errorMessenger" class='hidden'>
+        <img id="messageBox" src="/assets/img/speech.png" alt="speech box"/>
+        <h3><span id="errorMessage"></span></h3>
+        <img id="messenger" src="assets/img/upright.png" alt="schedulize logo"/>
+    </div>
+    <script src="/assets/appbundle.js"></script>
 </body>
 </html>

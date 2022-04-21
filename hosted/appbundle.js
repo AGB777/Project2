@@ -86,15 +86,52 @@ const ScheduleForm = props => {
   const formattedEntries = entries.map(entry => {
     let splitEntry = entry.split(':');
     let dayHour = splitEntry[0].replaceAll('_', ' ');
-    return /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("textarea", {
       key: splitEntry[0],
       className: dayHour,
-      id: splitEntry[0]
-    }, splitEntry[1]);
+      id: splitEntry[0],
+      defaultValue: splitEntry[1]
+    });
   });
   return /*#__PURE__*/React.createElement("div", {
     id: "ScheduleBox"
-  }, formattedEntries);
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "emptycell d0 hr0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d1"
+  }, "Sunday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d2"
+  }, "Monday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d3"
+  }, "Tuesday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d4"
+  }, "Wednesday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d5"
+  }, "Thursday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d6"
+  }, "Friday"), /*#__PURE__*/React.createElement("div", {
+    className: "day-label d7"
+  }, "Saturday"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr1"
+  }, "08:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr2"
+  }, "09:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr3"
+  }, "10:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr4"
+  }, "11:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr5"
+  }, "12:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr6"
+  }, "01:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr7"
+  }, "02:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr8"
+  }, "03:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hr9"
+  }, "04:00"), /*#__PURE__*/React.createElement("div", {
+    className: "time-label hra"
+  }, "05:00"), formattedEntries);
 };
 
 const loadSchedule = async () => {
@@ -108,17 +145,25 @@ const loadSchedule = async () => {
   }), document.querySelector('#content'));
 };
 
-const init = () => {
-  //here i need to construct my default schedule string
-  //i aint typing all that myself
+const defaultMyString = () => {
+  const numDays = 7;
+  const numHours = 10;
   defaultSched = '';
 
-  for (let i = 0; i < 7; i++) {
-    for (let n = 0; n < 7; n++) {
-      defaultSched = defaultSched.concat('entry_d', i, '_hr', n, ':agawaga,');
+  for (let i = 1; i <= numDays; i++) {
+    for (let n = 1; n <= numHours; n++) {
+      defaultSched = defaultSched.concat('entry_d', i, '_hr', n, ':');
+
+      if (i < numDays || n < numHours) {
+        //if this was not the last entry, add ','
+        defaultSched = defaultSched.concat(',');
+      }
     }
   }
+};
 
+const init = () => {
+  defaultMyString();
   ReactDOM.render( /*#__PURE__*/React.createElement(ScheduleForm, {
     week: defaultSched
   }), document.querySelector('#content'));
