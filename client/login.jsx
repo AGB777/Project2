@@ -102,13 +102,13 @@ const init = async () => {
         e.preventDefault();
         ReactDOM.render(<LoginWindow csrf = { data.csrfToken }/>, document.getElementById('content'));
         return false;
-    })
+    });
     
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         ReactDOM.render(<SignupWindow csrf = { data.csrfToken }/>, document.getElementById('content'));
         return false;
-    })
+    });
     
     ReactDOM.render(<LoginWindow csrf = { data.csrfToken }/>, document.getElementById('content'));
 }

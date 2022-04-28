@@ -3,6 +3,8 @@ const helper = require('./helper.js');
 let defaultSched = '';
 
 const ScheduleForm = (props) => {
+    const _csrf = props.csrf;
+    
     //the string will be formatted like this
     //d0_hr0:contents,d0_hr1:contents,d0_hr2
     const weekString = props.week;
@@ -39,6 +41,8 @@ const ScheduleForm = (props) => {
             <div className="time-label hra">05:00</div>
             
             {formattedEntries}
+            
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
         </div>
     )
 };
@@ -64,7 +68,7 @@ const defaultMyString = () => {
     
     for(let i=1; i<=numDays; i++){
         for(let n=1; n<=numHours; n++){
-            defaultSched = defaultSched.concat('entry_d',i,'_hr',n,':agawaga');
+            defaultSched = defaultSched.concat('entry_d',i,'_hr',n,':');
             if(i<numDays||n<numHours){
                 //if this was not the last entry, add ','
                 defaultSched = defaultSched.concat(',');
@@ -95,15 +99,35 @@ const readSchedule = () => {
         }
     }
     
+    
+    
     return schedString;
     
 };
 
-const init = () => {
+const SaveSchedule = (props) => {
+    const _csrf = document.querySelector('#_csrf').value;
+    const data = readSchedule();
+    
+    helper.sendPost('/scheduleData', {data, _csrf});
+}
+
+const init = async () => {
+    
+    const response = await fetch('getToken');
+    const data = await response.json();
+    
+    const saveButton = document.getElementById('saveButton');
+    
+    saveButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        SaveSchedule();
+        return false;
+    });
     
     defaultMyString();
     
-    ReactDOM.render(<ScheduleForm week = {defaultSched}/> , document.querySelector('#content'));
+    ReactDOM.render(<ScheduleForm week = {defaultSched} csrf = {data.csrfToken}/> , document.querySelector('#content'));
     
     console.log(readSchedule());
 };

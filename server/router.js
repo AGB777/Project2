@@ -8,7 +8,9 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
 
   app.get('/scheduleApp', mid.requiresSecure, mid.requiresLogin, controllers.Schedule.appPage);
+    
   app.get('/scheduleData', mid.requiresSecure, mid.requiresLogin, controllers.Schedule.getSchedule);
+    app.post('/scheduleData', mid.requiresSecure, mid.requiresLogin, controllers.Schedule.saveSchedule);
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
     

@@ -17,8 +17,26 @@ const getSchedule = (req, res) => {
     })
 }
 
+const saveSchedule = async (req, res) => {
+    const schedData = {
+        owner: req.session.account._id,
+        week: req.body.data,
+    }
+    
+    try {
+        const newSched = new Schedule(schedData);
+        newSched.save();
+        //Schedule.replace(schedData.owner, {week: schedData.week});
+        return res.status(201);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json({ error: 'An error occured' });
+    }
+}
+
 
 module.exports = {
   appPage,
     getSchedule,
+    saveSchedule,
 };

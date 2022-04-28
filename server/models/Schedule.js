@@ -27,6 +27,14 @@ ScheduleSchema.statics.findByOwner = (ownerId, callback) => {
     
     return ScheduleModel.find(search).select('week').lean().exec(callback);
 };
+
+ScheduleSchema.statics.replace = (ownerId, doc, callback) => {
+    const search = {
+        owner: mongoose.Types.ObjectId(ownerId),
+    };
+    
+    return ScheduleModel.findOneAndUpdate(search, doc).exec(callback);
+};
     
     
 

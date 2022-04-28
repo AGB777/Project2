@@ -79,8 +79,9 @@ const helper = __webpack_require__(1);
 let defaultSched = '';
 
 const ScheduleForm = props => {
-  //the string will be formatted like this
+  const _csrf = props.csrf; //the string will be formatted like this
   //d0_hr0:contents,d0_hr1:contents,d0_hr2
+
   const weekString = props.week;
   const entries = weekString.split(',');
   const formattedEntries = entries.map(entry => {
@@ -131,7 +132,12 @@ const ScheduleForm = props => {
     className: "time-label hr9"
   }, "04:00"), /*#__PURE__*/React.createElement("div", {
     className: "time-label hra"
-  }, "05:00"), formattedEntries);
+  }, "05:00"), formattedEntries, /*#__PURE__*/React.createElement("input", {
+    id: "_csrf",
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }));
 };
 
 const loadSchedule = async () => {
@@ -152,7 +158,7 @@ const defaultMyString = () => {
 
   for (let i = 1; i <= numDays; i++) {
     for (let n = 1; n <= numHours; n++) {
-      defaultSched = defaultSched.concat('entry_d', i, '_hr', n, ':agawaga');
+      defaultSched = defaultSched.concat('entry_d', i, '_hr', n, ':');
 
       if (i < numDays || n < numHours) {
         //if this was not the last entry, add ','
@@ -183,10 +189,28 @@ const readSchedule = () => {
   return schedString;
 };
 
-const init = () => {
+const SaveSchedule = props => {
+  const _csrf = document.querySelector('#_csrf').value;
+  const data = readSchedule();
+  helper.sendPost('/scheduleData', {
+    data,
+    _csrf
+  });
+};
+
+const init = async () => {
+  const response = await fetch('getToken');
+  const data = await response.json();
+  const saveButton = document.getElementById('saveButton');
+  saveButton.addEventListener('click', e => {
+    e.preventDefault();
+    SaveSchedule();
+    return false;
+  });
   defaultMyString();
   ReactDOM.render( /*#__PURE__*/React.createElement(ScheduleForm, {
-    week: defaultSched
+    week: defaultSched,
+    csrf: data.csrfToken
   }), document.querySelector('#content'));
   console.log(readSchedule());
 };
